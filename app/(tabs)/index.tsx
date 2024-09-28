@@ -14,7 +14,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={["#ff9a9e", "#ffe6c1"]}
+        colors={["#ffa574", "#F5F5F5"]}
         style={styles.headerBackground}
       />
       <ScrollView style={styles.scrollView}>
@@ -104,9 +104,9 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    height: "45%",
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    height: "60%",
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
   scrollView: {
     flex: 1,
