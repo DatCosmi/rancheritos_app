@@ -14,7 +14,7 @@ export default function TabTwoScreen() {
       headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
       headerImage={
         <LinearGradient
-          colors={["#ff9a9e", "#ffc79a"]}
+          colors={["#ffa99a", "#ffc79a"]}
           style={styles.headerBackground}
         >
           <Ionicons
