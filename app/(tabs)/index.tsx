@@ -10,6 +10,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/Ionicons";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const HomeScreen = () => {
   return (
@@ -29,7 +30,7 @@ const HomeScreen = () => {
         <View style={styles.mainContent}>
           <View style={styles.txtContainer}>
             <LinearGradient colors={["#ff9a9e", "#ffc79a"]} style={styles.icon}>
-              <Icon
+              <Ionicons
                 name="business"
                 size={50}
                 color="#fff"
@@ -47,7 +48,7 @@ const HomeScreen = () => {
 
           <View style={styles.txtContainer}>
             <LinearGradient colors={["#a1c4fd", "#9edbf7"]} style={styles.icon}>
-              <Icon
+              <Ionicons
                 name="ribbon"
                 size={50}
                 color="#fff"
@@ -64,7 +65,7 @@ const HomeScreen = () => {
 
           <View style={styles.txtContainer}>
             <LinearGradient colors={["#fbc2eb", "#c7a6ee"]} style={styles.icon}>
-              <Icon
+              <Ionicons
                 name="rocket"
                 size={50}
                 color="#fff"
@@ -114,6 +115,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 2,
     color: "#fff",
+    shadowColor: "#fff",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
   menuButton: {
     padding: 10,
@@ -143,13 +151,20 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   icon: {
-    alignSelf: "center",
     marginBottom: 10,
     borderRadius: 70,
     padding: 13,
+    maxWidth: 80,
   },
   iconInner: {
     alignSelf: "center",
+    shadowColor: "#fff",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
   },
   title: {
     fontSize: 24,
@@ -160,19 +175,19 @@ const styles = StyleSheet.create({
   },
   lineaColor: {
     height: 3,
-    width: "65%",
+    width: "45%",
     backgroundColor: "#ff9a9e",
     marginBottom: 10,
   },
   lineaColor2: {
     height: 3,
-    width: "25%",
+    width: "45%",
     backgroundColor: "#a1c4fd",
     marginBottom: 10,
   },
   lineaColor3: {
     height: 3,
-    width: "25%",
+    width: "45%",
     backgroundColor: "#fbc2eb",
     marginBottom: 10,
   },

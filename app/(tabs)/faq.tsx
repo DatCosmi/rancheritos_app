@@ -17,7 +17,11 @@ export default function TabTwoScreen() {
           colors={["#ff9a9e", "#ffc79a"]}
           style={styles.headerBackground}
         >
-          <Ionicons size={310} name="help-circle" style={styles.headerImage} />
+          <Ionicons
+            size={310}
+            name="help-circle-outline"
+            style={styles.headerImage}
+          />
         </LinearGradient>
       }
     >
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
   headerImage: {
     color: "#fff",
     bottom: -90,
-    left: -35,
+    right: 40,
     position: "absolute",
   },
   headerBackground: {

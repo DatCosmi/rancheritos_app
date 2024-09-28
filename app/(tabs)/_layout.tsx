@@ -40,9 +40,21 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="contact"
+        options={{
+          title: "Contáctanos",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "call" : "call-outline"}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="faq"
         options={{
-          title: "Preguntas Frecuentes",
+          title: "Información",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "help-circle" : "help-circle-outline"}

@@ -17,13 +17,15 @@ export default function TabTwoScreen() {
           colors={["#ff9a9e", "#ffc79a"]}
           style={styles.headerBackground}
         >
-          <Ionicons size={310} name="hammer" style={styles.headerImage} />
+          <Ionicons
+            size={310}
+            name="terminal-outline"
+            style={styles.headerImage}
+          />
         </LinearGradient>
       }
     >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText style={styles.title}>Productos y Servicios</ThemedText>
-      </ThemedView>
+      <Text style={styles.title}>Productos y Servicios</Text>
 
       <Text style={styles.subtitle}>Aplicaciones Móviles</Text>
 
@@ -75,8 +77,8 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   headerImage: {
     color: "#fff",
-    bottom: -90,
-    left: -35,
+    bottom: -110,
+    right: -40,
     position: "absolute",
   },
   headerBackground: {
@@ -92,6 +94,7 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     marginVertical: 10,
     color: "#616161",
+    alignSelf: "center",
   },
   subtitle: {
     fontSize: 20,
