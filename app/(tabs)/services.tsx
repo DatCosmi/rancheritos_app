@@ -14,7 +14,7 @@ export default function TabTwoScreen() {
       headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
       headerImage={
         <LinearGradient
-          colors={["#ffa574", "#fff"]}
+          colors={["#ff9a9e", "#ffc79a"]}
           style={styles.headerBackground}
         >
           <Ionicons size={310} name="hammer" style={styles.headerImage} />
@@ -26,7 +26,7 @@ export default function TabTwoScreen() {
       </ThemedView>
 
       <Text style={styles.subtitle}>Aplicaciones Móviles</Text>
-      {/* Nuevo degradado de colores para Aplicaciones Móviles */}
+
       <LinearGradient colors={["#4facfe", "#00f2fe"]} style={styles.icon}>
         <Ionicons size={50} name="phone-portrait" style={styles.iconContent} />
       </LinearGradient>
@@ -37,7 +37,7 @@ export default function TabTwoScreen() {
       </Text>
 
       <Text style={styles.subtitle}>Aplicaciones Web</Text>
-      {/* Nuevo degradado de colores para Aplicaciones Web */}
+
       <LinearGradient colors={["#43e97b", "#38f9d7"]} style={styles.icon}>
         <Ionicons size={50} name="desktop" style={styles.iconContent} />
       </LinearGradient>
@@ -48,7 +48,7 @@ export default function TabTwoScreen() {
       </Text>
 
       <Text style={styles.subtitle}>Bases de Datos</Text>
-      {/* Nuevo degradado de colores para Bases de Datos */}
+
       <LinearGradient colors={["#fa709a", "#fee140"]} style={styles.icon}>
         <Ionicons size={50} name="server" style={styles.iconContent} />
       </LinearGradient>
@@ -59,7 +59,7 @@ export default function TabTwoScreen() {
       </Text>
 
       <Text style={styles.subtitle}>Mantenimiento de Software</Text>
-      {/* Nuevo degradado de colores para Mantenimiento de Software */}
+
       <LinearGradient colors={["#fbc2eb", "#a6c1ee"]} style={styles.icon}>
         <Ionicons size={50} name="construct" style={styles.iconContent} />
       </LinearGradient>
@@ -104,12 +104,12 @@ const styles = StyleSheet.create({
     color: "#999",
     marginVertical: 10,
     textAlign: "center",
+    marginBottom: 30,
   },
   icon: {
     alignSelf: "center",
     borderRadius: 70,
     padding: 10,
-    marginBottom: 20,
   },
   iconContent: {
     color: "#fff",

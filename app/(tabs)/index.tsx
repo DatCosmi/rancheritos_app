@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/Ionicons";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
 
 const HomeScreen = () => {
   return (
@@ -78,15 +79,6 @@ const HomeScreen = () => {
               nuestros clientes a través de software eficiente y de alta
               calidad.
             </Text>
-          </View>
-
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity style={styles.buttonPrimary}>
-              <Text style={styles.buttonTextPrimary}>Nuestros Servicios</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonSecondary}>
-              <Text style={styles.buttonTextSecondary}>Saber más</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

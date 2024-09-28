@@ -39,6 +39,18 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="faq"
+        options={{
+          title: "Preguntas Frecuentes",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "help-circle" : "help-circle-outline"}
+              color={color}
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
