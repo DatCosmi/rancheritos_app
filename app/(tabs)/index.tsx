@@ -16,15 +16,12 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={["#ffa574", "#ffc79a"]}
+        colors={["#fb8d5e", "#ffd15b"]}
         style={styles.headerBackground}
       />
       <ScrollView style={styles.scrollView}>
         <View style={styles.header2}>
           <Text style={styles.logo}>Rancheritos</Text>
-          <TouchableOpacity style={styles.menuButton}>
-            <Text style={styles.menuIcon}>☰</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={styles.mainContent}>
@@ -159,13 +156,6 @@ const styles = StyleSheet.create({
   },
   iconInner: {
     alignSelf: "center",
-    shadowColor: "#fff",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
   },
   title: {
     fontSize: 24,

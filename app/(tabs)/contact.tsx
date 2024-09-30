@@ -54,7 +54,7 @@ const PersonalInfoForm = () => {
         headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
         headerImage={
           <LinearGradient
-            colors={["#ffa99a", "#ffc79a"]}
+            colors={["#fb8d5e", "#ffc05b"]}
             style={styles.headerBackground}
           >
             <Ionicons
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   nextButton: {
-    backgroundColor: "#ffa16a",
+    backgroundColor: "#ff8e4c",
     padding: 10,
     borderRadius: 4,
     flex: 1,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    color: "#ffa16a",
+    color: "#ff8e4c",
     fontWeight: "bold",
   },
   buttonText2: {
