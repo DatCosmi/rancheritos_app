@@ -1,4 +1,5 @@
 import ParallaxScrollView from "@/components/ParallaxScrollView";
+import TerminosCondiciones from "@/components/TerminosCondiciones";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useEffect } from "react";
@@ -12,14 +13,18 @@ import {
   Platform,
   Keyboard,
   ScrollView,
+  Modal,
+  Alert,
 } from "react-native";
 
 const PersonalInfoForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [birthDate, setBirthDate] = useState("");
+  const [message, setMessage] = useState("");
   const [keyboardOpen, setKeyboardOpen] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -32,18 +37,39 @@ const PersonalInfoForm = () => {
     );
 
     return () => {
-      keyboardDidHideListener.remove();
       keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
     };
   }, []);
 
   const handleNext = () => {
+    if (!termsAccepted) {
+      Alert.alert(
+        "Aviso",
+        "Debes aceptar los términos y condiciones para continuar."
+      );
+      return;
+    }
     console.log("Next button pressed");
   };
 
-  const handleCancel = () => {
-    console.log("Cancel button pressed");
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
   };
+
+  const handleAccept = () => {
+    setTermsAccepted(true); // Marcar el checkbox como aceptado
+    toggleModal(); // Cerrar el modal al aceptar
+    console.log("Aceptado");
+  };
+
+  const handleReject = () => {
+    toggleModal(); // Cerrar el modal al rechazar
+    console.log("Rechazado");
+  };
+
+  const openTermsModal = () => setIsModalVisible(true);
+  const closeTermsModal = () => setIsModalVisible(false);
 
   return (
     <KeyboardAvoidingView
@@ -67,6 +93,7 @@ const PersonalInfoForm = () => {
       >
         <ScrollView contentContainerStyle={styles.container}>
           <Text style={styles.title}>Contáctanos</Text>
+
           <TextInput
             style={styles.input}
             placeholder="Nombre"
@@ -90,15 +117,29 @@ const PersonalInfoForm = () => {
           <TextInput
             style={styles.messageInput}
             placeholder="Mensaje"
-            value={birthDate}
-            onChangeText={setBirthDate}
+            value={message}
+            onChangeText={setMessage}
             multiline
           />
-          <View style={styles.buttonContainer}>
+
+          <View style={styles.termsContainer}>
+            <TouchableOpacity onPress={openTermsModal}>
+              <Text style={styles.termsText}>Términos y condiciones</Text>
+            </TouchableOpacity>
             <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={handleCancel}
+              style={styles.checkbox}
+              onPress={() => setTermsAccepted(!termsAccepted)}
             >
+              <Ionicons
+                name={termsAccepted ? "checkbox" : "square-outline"}
+                size={24}
+                color="#ff8e4c"
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.cancelButton} onPress={() => { }}>
               <Text style={styles.buttonText}>CANCELAR</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
@@ -107,32 +148,19 @@ const PersonalInfoForm = () => {
           </View>
         </ScrollView>
       </ParallaxScrollView>
+
+      <Modal visible={isModalVisible} animationType="slide" transparent>
+        <TerminosCondiciones onAccept={handleAccept} onReject={handleReject} />
+      </Modal>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    backgroundColor: "white",
-  },
-  headerImage: {
-    color: "#fff",
-    bottom: -50,
-    left: 0,
-    position: "absolute",
-  },
-  headerBackground: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    lineHeight: 30,
-    marginVertical: 10,
-    color: "#616161",
-    marginBottom: 20,
-  },
+  container: { padding: 20, backgroundColor: "white" },
+  headerImage: { color: "#fff", bottom: -50, position: "absolute" },
+  headerBackground: { flex: 1 },
+  title: { fontSize: 30, fontWeight: "bold", marginBottom: 20 },
   input: {
     borderWidth: 1,
     borderColor: "#ddd",
@@ -144,11 +172,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ddd",
     padding: 10,
-    marginBottom: 10,
-    borderRadius: 4,
     height: 100,
     textAlignVertical: "top",
+    borderRadius: 4,
   },
+  termsContainer: { flexDirection: "row", alignItems: "center", marginTop: 10 },
+  termsText: {
+    color: "#ff8e4c",
+    textDecorationLine: "underline",
+    marginRight: 10,
+  },
+  checkbox: { marginLeft: "auto" },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -160,7 +194,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     flex: 1,
     marginRight: 10,
-    alignItems: "center",
   },
   nextButton: {
     backgroundColor: "#ff8e4c",
@@ -168,16 +201,15 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     flex: 1,
     marginLeft: 10,
-    alignItems: "center",
   },
-  buttonText: {
-    color: "#ff8e4c",
-    fontWeight: "bold",
+  buttonText: { color: "#ff8e4c", fontWeight: "bold" },
+  buttonText2: { color: "#fff", fontWeight: "bold" },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
-  buttonText2: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
+  modalContent: { backgroundColor: "white", padding: 20, borderRadius: 10 },
 });
 
 export default PersonalInfoForm;
