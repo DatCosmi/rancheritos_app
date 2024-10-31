@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "778676238861",
+    "project_id": "rancheritosapp",
+    "storage_bucket": "rancheritosapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778676238861:android:e41efbadfae86426e2b344",
+        "android_client_info": {
+          "package_name": "com.rancheritos.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfMm946-uuGIm0CfoMsjE9GdjIlMaJ7NE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

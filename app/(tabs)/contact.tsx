@@ -3,6 +3,8 @@ import TerminosCondiciones from "@/components/TerminosCondiciones";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useEffect } from "react";
+import * as LocalAuthentication from "expo-local-authentication";
+import * as ImagePicker from "expo-image-picker";
 import {
   View,
   Text,
@@ -15,6 +17,7 @@ import {
   ScrollView,
   Modal,
   Alert,
+  Image,
 } from "react-native";
 
 const PersonalInfoForm = () => {
@@ -25,6 +28,7 @@ const PersonalInfoForm = () => {
   const [keyboardOpen, setKeyboardOpen] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [photo, setPhoto] = useState(null);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -42,15 +46,35 @@ const PersonalInfoForm = () => {
     };
   }, []);
 
-  const handleNext = () => {
+  const authenticate = async () => {
+    const hasHardware = await LocalAuthentication.hasHardwareAsync();
+    const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+
+    if (!hasHardware || !isEnrolled) {
+      Alert.alert("Autenticación no disponible", "Este dispositivo no soporta autenticación biométrica.");
+      return false;
+    }
+
+    const result = await LocalAuthentication.authenticateAsync({
+      promptMessage: "Confirma tu identidad",
+    });
+
+    return result.success;
+  };
+
+  const handleNext = async () => {
     if (!termsAccepted) {
-      Alert.alert(
-        "Aviso",
-        "Debes aceptar los términos y condiciones para continuar."
-      );
+      Alert.alert("Aviso", "Debes aceptar los términos y condiciones para continuar.");
       return;
     }
-    console.log("Next button pressed");
+
+    const isAuthenticated = await authenticate();
+    if (isAuthenticated) {
+      console.log("Formulario enviado");
+      // Aquí puedes añadir el código para enviar el formulario
+    } else {
+      Alert.alert("Error de autenticación", "No se pudo verificar la huella digital.");
+    }
   };
 
   const toggleModal = () => {
@@ -58,18 +82,36 @@ const PersonalInfoForm = () => {
   };
 
   const handleAccept = () => {
-    setTermsAccepted(true); // Marcar el checkbox como aceptado
-    toggleModal(); // Cerrar el modal al aceptar
-    console.log("Aceptado");
+    setTermsAccepted(true);
+    toggleModal();
   };
 
   const handleReject = () => {
-    toggleModal(); // Cerrar el modal al rechazar
-    console.log("Rechazado");
+    toggleModal();
   };
 
   const openTermsModal = () => setIsModalVisible(true);
-  const closeTermsModal = () => setIsModalVisible(false);
+
+  const takePhoto = async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert("Permiso denegado", "Se requiere acceso a la cámara para tomar una foto.");
+      return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      // Obtén la URI de la imagen capturada
+      setPhoto(result.assets[0].uri); // Usamos result.assets[0].uri para acceder a la imagen
+    } else {
+      console.log("Captura de imagen cancelada");
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -121,6 +163,12 @@ const PersonalInfoForm = () => {
             onChangeText={setMessage}
             multiline
           />
+
+          <TouchableOpacity style={styles.photoButton} onPress={takePhoto}>
+            <Text style={styles.photoButtonText}>Tomar foto</Text>
+          </TouchableOpacity>
+
+          {photo && <Image source={{ uri: photo }} style={styles.photo} />}
 
           <View style={styles.termsContainer}>
             <TouchableOpacity onPress={openTermsModal}>
@@ -204,6 +252,20 @@ const styles = StyleSheet.create({
   },
   buttonText: { color: "#ff8e4c", fontWeight: "bold" },
   buttonText2: { color: "#fff", fontWeight: "bold" },
+  photoButton: {
+    backgroundColor: "#ff8e4c",
+    padding: 10,
+    borderRadius: 4,
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  photoButtonText: { color: "#fff", fontWeight: "bold" },
+  photo: {
+    width: "100%",
+    height: 200,
+    borderRadius: 10,
+    marginTop: 10,
+  },
   modalContainer: {
     flex: 1,
     justifyContent: "center",
